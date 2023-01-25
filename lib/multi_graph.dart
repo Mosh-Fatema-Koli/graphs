@@ -11,8 +11,31 @@ class StakeGraps extends StatefulWidget {
 
 class _StakeGrapsState extends State<StakeGraps> {
 
+  // Initial Selected Value
+  String dropdownvalue = 'Select Month';
+
+  // List of items in our dropdown menu
+  var items = [
+    'Select Month',
+    'Jan',
+    'Feb',
+    'Mar',
+    'Apr',
+  ];
+  String dropdownvalue1 = 'Select Dealer';
+
+  // List of items in our dropdown menu
+  var items1 = [
+    'Select Dealer',
+    'Dealer1',
+    'Dealer2',
+    'Dealer3',
+    'Dealer',
+    'All Dealer',
+  ];
+
   List<Data> data = [
-    Data("Jan", 30, 40, 50, 60, 70, 60),
+    Data("Jan", 60, 40, 50, 60, 70, 60),
     Data("Feb", 40, 45, 20, 10, 10, 50),
     Data("Mrc", 30, 20, 30, 40, 50, 20),
     Data("Apr", 45, 42, 55, 65, 75, 22),
@@ -38,58 +61,116 @@ class _StakeGrapsState extends State<StakeGraps> {
               // Enable legend
               legend: Legend(isVisible: true),
               // Enable tooltip
-              //tooltipBehavior: TooltipBehavior(enable: true),
+              tooltipBehavior: TooltipBehavior(enable: true),
 
               series: <ChartSeries <Data, String>>[
 
 
-                StackedLineSeries<Data, String>(
+                StackedAreaSeries<Data, String>(
                   dataSource: data,
                   xValueMapper:(Data exp,_) =>exp.Catagoeies ,
                   yValueMapper: (Data exp,_) =>exp.Dealer1,
                    name: 'Dealer 1',
               // Enable data label
               dataLabelSettings: DataLabelSettings(isVisible: true)),
-                StackedLineSeries<Data, String>(
+                StackedAreaSeries<Data, String>(
                     dataSource: data,
                     xValueMapper:(Data exp,_) =>exp.Catagoeies ,
                     yValueMapper: (Data exp,_) =>exp.Dealer2,
                     name: 'Dealer2',
                     // Enable data label
                     dataLabelSettings: DataLabelSettings(isVisible: true)),
-                StackedLineSeries<Data, String>(
+                StackedAreaSeries<Data, String>(
                     dataSource: data,
                     xValueMapper:(Data exp,_) =>exp.Catagoeies ,
                     yValueMapper: (Data exp,_) =>exp.Dealer3,
                     name: 'Dealer3',
                     // Enable data label
                     dataLabelSettings: DataLabelSettings(isVisible: true)),
-                StackedLineSeries<Data, String>(
+                StackedAreaSeries<Data, String>(
                     dataSource: data,
                     xValueMapper:(Data exp,_) =>exp.Catagoeies ,
                     yValueMapper: (Data exp,_) =>exp.Dealer4,
                     name: 'Dealer4',
                     // Enable data label
                     dataLabelSettings: DataLabelSettings(isVisible: true)),
-                StackedLineSeries<Data, String>(
+                StackedAreaSeries<Data, String>(
                     dataSource: data,
                     xValueMapper:(Data exp,_) =>exp.Catagoeies ,
                     yValueMapper: (Data exp,_) =>exp.Dealer5,
                     name: 'Dealer5',
                     // Enable data label
                     dataLabelSettings: DataLabelSettings(isVisible: true)),
-                StackedLineSeries<Data, String>(
+                StackedAreaSeries<Data, String>(
                     dataSource: data,
                     xValueMapper:(Data exp,_) =>exp.Catagoeies ,
                     yValueMapper: (Data exp,_) =>exp.Dealer6,
-                    name: 'Dealer6',
+                    name: 'Dealer3',
                     // Enable data label
                     dataLabelSettings: DataLabelSettings(isVisible: true)),
+
 
 
               ],
               primaryXAxis: CategoryAxis(),
             ),
+          ),
+
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              DropdownButton(
+
+                // Initial Value
+                value: dropdownvalue,
+
+                // Down Arrow Icon
+                icon: const Icon(Icons.keyboard_arrow_down),
+
+                // Array list of items
+                items: items.map((String items) {
+                  return DropdownMenuItem(
+                    value: items,
+                    child: Text(items),
+                  );
+                }).toList(),
+                // After selecting the desired option,it will
+                // change button value to selected value
+                onChanged: (String? newValue) {
+                  setState(() {
+                    dropdownvalue = newValue!;
+                  });
+                },
+              ),
+              DropdownButton(
+
+                // Initial Value
+                value: dropdownvalue1,
+
+                // Down Arrow Icon
+                icon: const Icon(Icons.keyboard_arrow_down),
+
+                // Array list of items
+                items: items1.map((String items1) {
+                  return DropdownMenuItem(
+                    value: items1,
+                    child: Text(items1),
+                  );
+                }).toList(),
+                // After selecting the desired option,it will
+                // change button value to selected value
+                onChanged: (String? newValue) {
+                  setState(() {
+                    dropdownvalue1 = newValue!;
+                  });
+                },
+              ),
+              ElevatedButton(onPressed: (){
+
+
+              }, child: Text("Search"))
+
+            ],
           ),
 
 
